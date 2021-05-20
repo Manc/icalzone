@@ -82,7 +82,7 @@ END:VTIMEZONE
 [npm-version-image]: https://img.shields.io/npm/v/icalzone.svg?style=flat
 
 [travis-url]: https://travis-ci.org/Manc/icalzone
-[travis-image]: https://img.shields.io/travis/Manc/icalzone/master.svg?style=flat
+[travis-image]: https://img.shields.io/travis/Manc/icalzone/main.svg?style=flat
 
 [min-size-image]: https://img.shields.io/bundlephobia/min/icalzone?style=flat
 
