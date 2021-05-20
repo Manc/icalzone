@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "paths": {
+            "@touch4it/ical-timezones/zones": ["./types/zones.d.ts"]
+        }
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}
