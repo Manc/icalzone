@@ -3,9 +3,6 @@ import { defaultStart } from '../src/zones';
 
 
 describe('getZoneLines()', () => {
-	const asString = getZoneString('America/Los_Angeles');
-	console.log(asString);
-
 	it('renders zone "Europe/Budapest" with wrapping by default', () => {
 		const result = getZoneLines('Europe/Budapest');
 		expect(result).toBeDefined();
