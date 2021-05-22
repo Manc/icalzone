@@ -4,7 +4,6 @@
   "description": "iCalzone is a light-weight VTIMEZONE provider",
   "author": "Nick Singleton",
   "license": "ISC",
-  "private": false,
   "scripts": {
     "build-zones": "rm ./src/zones.ts ; ts-node --dir ./scripts buildzones",
     "build-library": "rm -rf ./dist ; tsc --project tsconfig.build.json",
