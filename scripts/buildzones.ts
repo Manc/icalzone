@@ -7,15 +7,30 @@ import zoneMap from '@touch4it/ical-timezones/zones';
 
 const defaultStart = '19700101T000000';
 
-function loadZoneIcs(filename: string) {
-	return fs.readFileSync(
-		path.join(__dirname, '../node_modules/@touch4it/ical-timezones/zones', filename),
-		'utf8'
-	);
+function detectZonesPath(): string {
+	// It may be in `node_modules`?
+	const nm = path.join(__dirname, '../node_modules/@touch4it/ical-timezones/zones');
+	if (fs.existsSync(nm)) {
+		return nm;
+	}
+
+	// It may be somewhere in `.yarn`?
+	const yarnUnpluggedPath = path.join(__dirname, '../.yarn/unplugged');
+	const results = fs.readdirSync(yarnUnpluggedPath);
+	const match = results.find(path => {
+		return path.startsWith('@touch4it-ical-timezones');
+	});
+	if (match) {
+		const yarnPath = path.join(yarnUnpluggedPath, match, 'node_modules/@touch4it/ical-timezones/zones');
+		if (fs.existsSync(yarnPath)) {
+			return yarnPath;
+		}
+	}
+
+	throw new Error('Package `@touch4it/ical-timezones` not found. Make sure dependencies are installed.');
 }
 
 function parseRRuleStr(str: string): ZoneRRule {
-	// const match = str.match(/FREQ=([A-Z]+);BYMONTH=([0-9]+);BYDAY=(-?[0-9A-Z]+)/);
 	const match = str.match(/FREQ=YEARLY;BYMONTH=([0-9]+);BYDAY=(-?[0-9A-Z]+)/);
 	if (!match) {
 		throw new Error('Unexpected RRULE string. Manually check and adapt code accordingly.');
@@ -102,6 +117,8 @@ function extractVTZData(icsContent: string): ZoneData {
 	return data;
 }
 
+const zonesPath = detectZonesPath();
+
 const zoneDataMap = new Map<string, ZoneData>();
 const statsStart = new Map<string, number>();
 
@@ -113,7 +130,9 @@ const filteredKeys = Object.entries(zoneMap).filter(([key, value]) =>
 
 filteredKeys
 	.forEach(zoneFileName => {
-		const tzData = extractVTZData(loadZoneIcs(zoneFileName));
+		const tzData = extractVTZData(
+			fs.readFileSync(path.join(zonesPath, zoneFileName), 'utf8')
+		);
 
 		// Collect data for analysis and remove start date if unnecessary.
 		const startStandard = tzData.s.s;

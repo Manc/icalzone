@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - stable
 before_script:
-  - npm run build-zones
+  - yarn run build-zones
 script:
   - yarn test
   - yarn lint

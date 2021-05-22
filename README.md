@@ -78,6 +78,30 @@ END:VTIMEZONE
 > Tip: If you don’t need the opening `BEGIN:VTIMEZONE` and closing `END:VTIMEZONE` lines, set the second optional argument of either function to `false`.
 
 
+## Development
+
+If you want to help develop this package, here are some tips.
+
+After cloning this repository you would usually run:
+
+```sh
+yarn install
+yarn run build-zones
+```
+
+This package is configured for use with Yarn 2; although NPM will probably also work (replace `yarn` with `npm`), I haven’t tested it.
+
+If you are using Yarn and an IDE (e.g. Visual Studio Code), you may run into TypeScript errors. This is because the IDE can’t find TS and the type definitions in the `node_modules` directory, because Yarn 2 doesn’t do `node_modules`. Run this command if you use Visual Studio Code:
+
+```sh
+yarn dlx @yarnpkg/pnpify --sdk vscode
+```
+
+After that you should be good to go. For other IDEs or generally more information on this, look [here](https://yarnpkg.com/getting-started/editor-sdks). It sounds like bit of extra trouble and I’m not sure yet if that really is the future, but it is what is for now.
+
+The second command from above (`yarn run build-zones`) will read data from the package `@touch4it/ical-timezones` and generate the file `src/zones.ts`, which is then imported from the actual library source file `src/index.ts`.
+
+
 [npm-url]: https://npmjs.org/package/icalzone
 [npm-version-image]: https://img.shields.io/npm/v/icalzone.svg?style=flat-square
 
