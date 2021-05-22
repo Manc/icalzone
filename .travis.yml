@@ -1,9 +1,8 @@
 language: node_js
 node_js:
- - stable
-install:
- - npm install
+  - stable
 before_script:
- - npm run build-zones
+  - npm run build-zones
 script:
- - npm test
+  - yarn test
+  - yarn lint

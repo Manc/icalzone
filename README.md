@@ -79,12 +79,12 @@ END:VTIMEZONE
 
 
 [npm-url]: https://npmjs.org/package/icalzone
-[npm-version-image]: https://img.shields.io/npm/v/icalzone.svg?style=flat
+[npm-version-image]: https://img.shields.io/npm/v/icalzone.svg?style=flat-square
 
-[travis-url]: https://travis-ci.org/Manc/icalzone
-[travis-image]: https://img.shields.io/travis/Manc/icalzone/main.svg?style=flat
+[travis-url]: https://travis-ci.com/Manc/icalzone
+[travis-image]: https://img.shields.io/travis/com/Manc/icalzone/main.svg?style=flat-square
 
-[min-size-image]: https://img.shields.io/bundlephobia/min/icalzone?style=flat
+[min-size-image]: https://img.shields.io/bundlephobia/min/icalzone?style=flat-square
 
 [license-url]: LICENSE
-[license-image]: https://img.shields.io/badge/license-ISC-blue.svg?style=flat
+[license-image]: https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square
