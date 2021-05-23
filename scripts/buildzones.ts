@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../src/global.d.ts" />
 
 import fs from 'fs';
@@ -15,16 +16,14 @@ function detectZonesPath(): string {
 	}
 
 	// It may be somewhere in `.yarn`?
-	const yarnUnpluggedPath = path.join(__dirname, '../.yarn/unplugged');
-	const results = fs.readdirSync(yarnUnpluggedPath);
-	const match = results.find(path => {
-		return path.startsWith('@touch4it-ical-timezones');
-	});
-	if (match) {
-		const yarnPath = path.join(yarnUnpluggedPath, match, 'node_modules/@touch4it/ical-timezones/zones');
-		if (fs.existsSync(yarnPath)) {
-			return yarnPath;
-		}
+	const yarnPath = path.join(
+		path.dirname(
+			require.resolve('@touch4it/ical-timezones')
+		),
+		'zones'
+	);
+	if (fs.existsSync(yarnPath)) {
+		return yarnPath;
 	}
 
 	throw new Error('Package `@touch4it/ical-timezones` not found. Make sure dependencies are installed.');
@@ -55,8 +54,8 @@ function extractVTZData(icsContent: string): ZoneData {
 		.map(l => l.trimEnd());
 
 		
-	let standard: Partial<ZoneSubData> = {};
-	let daylight: Partial<ZoneSubData> = {};
+	const standard: Partial<ZoneSubData> = {};
+	const daylight: Partial<ZoneSubData> = {};
 	let currentObject: Partial<ZoneSubData> | null = null;
 	lines.forEach(line => {
 		const [key, value] = line.split(':');
